@@ -178,15 +178,15 @@ std::vector<std::pair<std::string, std::vector<string>>> match_invoice_item(
         invoice_itemOutData.push_back({ invoiceInData.at(i).first, vector<string> {10} });
     }
 
-    // Iterate through sampleData CUSTOMER_CODEs
+    // Iterate through invoiceInData INVOICE_CODEs
     for (int i = 0; i < invoiceInData.at(0).second.size(); ++i) {
-        // Search invoiceInData for matching CUSTOMER_CODE in sampleData, saving iterator of found string
-        it = find(invoiceInData.at(0).second.begin(), invoiceInData.at(0).second.end(), invoiceInData.at(0).second.at(i));
+        // Search invoiceInData for matching INVOICE_CODE in invoiceInData, saving iterator of found string
+        it = find(invoiceInData.at(1).second.begin(), invoiceInData.at(1).second.end(), invoiceInData.at(1).second.at(i));
 
         // If there is a match
-        if (it != invoiceInData.at(0).second.end()) {
+        if (it != invoiceInData.at(1).second.end()) {
             // Translate iterator into found index
-            int index = distance(invoiceInData.at(0).second.begin(), it);
+            int index = distance(invoiceInData.at(1).second.begin(), it);
 
             for (int i = 0; i < invoiceInData.size(); i++) {
                 invoice_itemOutData.at(i).second[index] = invoiceInData.at(i).second[index];
