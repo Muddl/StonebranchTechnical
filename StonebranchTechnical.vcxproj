@@ -144,7 +144,9 @@
   <ItemGroup>
     <None Include="CUSTOMER-OUTPUT.csv" />
     <None Include="CUSTOMER.csv" />
+    <None Include="INVOICE-OUTPUT.csv" />
     <None Include="INVOICE.csv" />
+    <None Include="INVOICE_ITEM-OUTPUT.csv" />
     <None Include="INVOICE_ITEM.csv" />
     <None Include="SAMPLE.csv" />
   </ItemGroup>

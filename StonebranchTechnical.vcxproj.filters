@@ -26,5 +26,11 @@
     <None Include="CUSTOMER-OUTPUT.csv">
       <Filter>src</Filter>
     </None>
+    <None Include="INVOICE-OUTPUT.csv">
+      <Filter>src</Filter>
+    </None>
+    <None Include="INVOICE_ITEM-OUTPUT.csv">
+      <Filter>src</Filter>
+    </None>
   </ItemGroup>
 </Project>

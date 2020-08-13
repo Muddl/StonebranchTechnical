@@ -168,10 +168,33 @@ std::vector<std::pair<std::string, std::vector<string>>> match_invoice(
 }
 
 std::vector<std::pair<std::string, std::vector<string>>> match_invoice_item(
-    std::vector<std::pair<std::string, std::vector<string>>> sampleData,
-    std::vector<std::pair<std::string, std::vector<string>>> invoice_itemData
+    std::vector<std::pair<std::string, std::vector<string>>> invoiceInData
 ) {
-    return {};
+    std::vector<std::pair<std::string, std::vector<string>>> invoice_itemOutData;
+    vector<string> ::iterator it;
+
+    // Add column headers to invoice_itemOutData 
+    for (int i = 0; i < invoiceInData.size(); i++) {
+        invoice_itemOutData.push_back({ invoiceInData.at(i).first, vector<string> {10} });
+    }
+
+    // Iterate through sampleData CUSTOMER_CODEs
+    for (int i = 0; i < invoiceInData.at(0).second.size(); ++i) {
+        // Search invoiceInData for matching CUSTOMER_CODE in sampleData, saving iterator of found string
+        it = find(invoiceInData.at(0).second.begin(), invoiceInData.at(0).second.end(), invoiceInData.at(0).second.at(i));
+
+        // If there is a match
+        if (it != invoiceInData.at(0).second.end()) {
+            // Translate iterator into found index
+            int index = distance(invoiceInData.at(0).second.begin(), it);
+
+            for (int i = 0; i < invoiceInData.size(); i++) {
+                invoice_itemOutData.at(i).second[index] = invoiceInData.at(i).second[index];
+            }
+        }
+    }
+
+    return invoice_itemOutData;
 }
 
 int main()
@@ -184,13 +207,13 @@ int main()
 
     // Initialize & fill output files
     std::vector<std::pair<std::string, std::vector<string>>> customerOut = match_customer(sample, customerIn);
-    std::vector<std::pair<std::string, std::vector<string>>> invoiceOut;
-    /*std::vector<std::pair<std::string, std::vector<string>>> invoice_itemOut;*/
+    std::vector<std::pair<std::string, std::vector<string>>> invoiceOut = match_invoice(sample, invoiceIn);
+    std::vector<std::pair<std::string, std::vector<string>>> invoice_itemOut = match_invoice_item(invoiceOut);
 
     // Write to output files
     write_csv("CUSTOMER-OUTPUT.csv", customerOut);
     write_csv("INVOICE-OUTPUT.csv", invoiceOut);
-    /*write_csv("INVOICE_ITEM-OUTPUT.csv", invoice_itemOut);*/
+    write_csv("INVOICE_ITEM-OUTPUT.csv", invoice_itemOut);
 
 	return 0;
 }
